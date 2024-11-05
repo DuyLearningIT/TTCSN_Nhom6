@@ -5,14 +5,14 @@ from rest_framework import status
 from .models import User
 from .serializers import UserSerializer
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
 
-def home_page(request):
-    data = {
-        "title": "Welcome to My Home Page",
-        "description": "This is the home page of my application."
-    }
-    return JsonResponse(data)
+class HomePage(APIView):
+    def get(self, request):
+        data = {
+            "title": "Welcome to My Home Page",
+            "description": "This is the home page of my application."
+        }
+        return Response(data)
 class CreateUserView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
